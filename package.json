@@ -20,5 +20,8 @@
   "homepage": "https://github.com/ranjanrai12/Nodejs#readme",
   "devDependencies": {
     "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "express-session": "^1.16.2"
   }
 }
