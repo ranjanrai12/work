@@ -1,5 +1,5 @@
  const http = require('http');
-
+ const path = require('path');
 // const hostName = '127.0.1.1';
 // const port = 3000;
 
@@ -25,13 +25,14 @@ const shopRouter = require('./routes/shop');
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-app.use(adminRouter);
+app.use('/admin', adminRouter);
 app.use(shopRouter);
 
 // Page not found
 app.use((req,res,next)=>{
-  res.status(404).send("<h1>Page Not Found</h1>")
-})
+  // res.status(404).send("<h1>Page Not Found</h1>")
+  res.status(404).sendFile(path.join(__dirname,'views', '404.html'));
+});
 const server = http.createServer(app);
 
 server.listen(3000);
