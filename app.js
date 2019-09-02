@@ -18,23 +18,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+
+const adminRouter = require('./routes/admin');
+const shopRouter = require('./routes/shop');
+
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-app.use('/add-product',(req, res, next)=>{
-    console.log("the another middle ware!!");
-    res.send("<form action='/product' method='POST'><input type='text'name='title'><button type='submit'>Add Product</button> </form>");
-});
+app.use(adminRouter);
+app.use(shopRouter);
 
-app.post('/product',(req,res,next)=>{
-  console.log(req.body);
-  res.redirect('/')
-});
-
-app.use('/', (req,res,next) => {
-  console.log("first console");
-  res.send("<h1>Hello from express!!</h1>")
-});
+// Page not found
+app.use((req,res,next)=>{
+  res.status(404).send("<h1>Page Not Found</h1>")
+})
 const server = http.createServer(app);
 
 server.listen(3000);
