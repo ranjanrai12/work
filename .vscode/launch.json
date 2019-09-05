@@ -7,11 +7,12 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\(app.js)",
-            "restart": true,
+            "name": "nodemon",
             "runtimeExecutable": "nodemon",
-            "console":"integratedTerminal"
-        }
+            "program": "${workspaceFolder}/app.js",
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
     ]
 }
