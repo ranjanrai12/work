@@ -22,9 +22,12 @@ const app = express();
 const adminRouter = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
+const monitor = require('express-status-monitor')();
+console.log('Type of Monitor: '+typeof monitor);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(monitor);
 app.use('/admin', adminRouter);
 app.use(shopRouter);
 
@@ -35,4 +38,6 @@ app.use((req,res,next)=>{
 });
 const server = http.createServer(app);
 
-server.listen(3000);
+server.listen(5000, ()=>{
+  console.log("Listening to port 5000")
+});
