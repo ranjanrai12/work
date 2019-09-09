@@ -19,7 +19,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-const adminRouter = require('./routes/admin');
+app.set('view engine', 'pug');
+app.set('views', 'views');
+
+const adminData = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
 const monitor = require('express-status-monitor')();
@@ -27,14 +30,14 @@ console.log('Type of Monitor: '+typeof monitor);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use(monitor);
-app.use('/admin', adminRouter);
+app.use('/admin', adminData.routes);
 app.use(shopRouter);
 
 // Page not found
 app.use((req,res,next)=>{
   // res.status(404).send("<h1>Page Not Found</h1>")
-  res.status(404).sendFile(path.join(__dirname,'views', '404.html'));
+  // res.status(404).sendFile(path.join(__dirname,'views', '404.html'));
+     res.render('404',{pageTitle: 'Page Not Found'})
 });
 const server = http.createServer(app);
 
