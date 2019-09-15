@@ -31,6 +31,8 @@ app.set('views', 'views');
 const adminData = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
+const monitor = require('express-status-monitor')();
+console.log('Type of Monitor: '+typeof monitor);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -48,6 +50,6 @@ app.use((req,res,next)=>{
 });
 const server = http.createServer(app);
 
-server.listen(5000,()=>{
-  console.log("port is listening")
+server.listen(5000, ()=>{
+  console.log("Listening to port 5000")
 });
